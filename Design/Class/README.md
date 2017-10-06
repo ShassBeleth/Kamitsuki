@@ -1,1 +1,1 @@
-![クラス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/State/%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB.png)
+![クラス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/Class/%E3%82%AF%E3%83%A9%E3%82%B9%E5%9B%B3.png)
