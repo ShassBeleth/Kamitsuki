@@ -2,10 +2,196 @@
 
 title クラス図
 
-Class01 <|-- Class02
-Class03 *-- Class04
-Class05 o-- Class06
-Class07 .. Class08
-Class09 -- Class10
+'privateやpublicのアイコンをやめて-や+で記載'
+skinparam classAttributeIconSize 0
+
+'定義'
+namespace Kamitsuki {
+
+    namespace Models {
+
+    }
+
+    namespace Presenters {
+
+        namespace Title {
+        }
+
+        namespace Option {
+        }
+
+        namespace CharacterSelect {
+        }
+
+        namespace HumanCustomizer {
+        }
+
+        namespace OgreCustomizer {
+        }
+
+        namespace MultiPlay {
+
+            namespace Entrance {
+            }
+
+            namespace Lobby {
+            }
+
+            namespace MainGame {
+            }
+
+        }
+
+        namespace Result {
+        }
+
+    }
+
+    namespace Views {
+
+        namespace Title {
+
+            'TitleLogoView------------------------------------------'
+            TitleLogoView : + Action OnAnyUserOperationListener
+            TitleLogoView : + Action OnEndAnimationListener
+            '--------------------------------------------------------'
+            TitleLogoView : + void Update()
+            TitleLogoView : + void OnAnyUserOperation()
+            '--------------------------------------------------------'
+
+            'TitleSelectorView------------------------------------------'
+            TitleSelectorView : + Action OnClickedPlayListener
+            TitleSelectorView : + Action OnClickedOptionListener
+            TitleSelectorView : + Action OnClickedExitListener
+            '--------------------------------------------------------'
+            TitleSelectorView : + void OnClickedPlay()
+            TitleSelectorView : + void OnClickedOption()
+            TitleSelectorView : + void OnClickedExit()
+            '--------------------------------------------------------'
+
+        }
+
+        namespace Option {
+
+            'OptionView------------------------------------------'
+            OptionView : + Action OnClickedBackListener
+            '--------------------------------------------------------'
+            OptionView : + void OnClickedBack()
+            '--------------------------------------------------------'
+
+        }
+
+        namespace CharacterSelect {
+
+            'CharacterSelectView------------------------------------------'
+            CharacterSelectView : + Action OnClickedHumanListener
+            CharacterSelectView : + Action OnClickedOgreListener
+            CharacterSelectView : + Action OnClickedBackListener
+            '--------------------------------------------------------'
+            CharacterSelectView : + void OnClickedHuman()
+            CharacterSelectView : + void OnClickedOgre()
+            CharacterSelectView : + void OnClickedBack()
+            '--------------------------------------------------------'
+
+        }
+
+        namespace HumanCustomizer {
+
+            'HumanCustomizerView------------------------------------------'
+            HumanCustomizerView : + Action<int> OnSelectedWeaponListener
+            HumanCustomizerView : + Action<int> OnSelectedSuitListener
+            HumanCustomizerView : + Action OnClickedBackListener
+            '--------------------------------------------------------'
+            HumanCustomizerView : + void OnSelectedWeapon( int id )
+            HumanCustomizerView : + void OnSelectedSuit( int id )
+            HumanCustomizerView : + void OnClickedBack()
+            '--------------------------------------------------------'
+
+        }
+
+        namespace OgreCustomizer {
+
+            'OgreCustomizerView------------------------------------------'
+            OgreCustomizerView : + Action<int> OnSelectedTypeListener
+            OgreCustomizerView : + Action OnClickedBackListener
+            '--------------------------------------------------------'
+            OgreCustomizerView : + void OnSelectedType( int id )
+            OgreCustomizerView : + void OnClickedBack()
+            '--------------------------------------------------------'
+
+        }
+
+        namespace MultiPlay {
+
+            namespace Entrance {
+
+                'EntranceView------------------------------------------'
+                EntranceView : + Action OnClickedCreateRoomListener
+                EntranceView : + Action OnClickedSearchRoomListener
+                EntranceView : + Action OnClickedCharacterSelectListener
+                EntranceView : + Action OnClickedBackListener
+                '--------------------------------------------------------'
+                EntranceView : + void OnClickedCreateRoom()
+                EntranceView : + void OnClickedSearchRoom()
+                EntranceView : + void OnClickedCharacterSelect()
+                EntranceView : + void OnClickedBack()
+                '--------------------------------------------------------'
+
+            }
+
+            namespace Lobby {
+
+                'RoomCreaterView------------------------------------------'
+                RoomCreaterView : + Action OnClickedCreateRoomListener
+                RoomCreaterView : + Action OnClickedBackListener
+                '--------------------------------------------------------'
+                RoomCreaterView : + void OnClickedCreateRoom()
+                RoomCreaterView : + void OnClickedBack()
+                '--------------------------------------------------------'
+
+                'RoomSearcherView------------------------------------------'
+                RoomSearcherView : + Action OnClikedPasswordDecisionListener
+                RoomSearcherView : + Action OnSelectedRoomListener
+                RoomSearcherView : + Action OnClickedBackListener
+                '--------------------------------------------------------'
+                RoomSearcherView : + void OnClickedPasswordDecision()
+                RoomSearcherView : + void OnSelectedRoom()
+                RoomSearcherView : + void OnClickedBack()
+                '--------------------------------------------------------'
+
+                'StandbyRoomView------------------------------------------'
+                StandbyRoomView : + Action OnClickedStartListener
+                StandbyRoomView : + Action OnClickedBackListener
+                '--------------------------------------------------------'
+                StandbyRoomView : + void OnClickedStart()
+                StandbyRoomView : + void OnClickedBack()
+                '--------------------------------------------------------'
+
+            }
+
+            namespace MainGame {
+
+
+            }
+
+        }
+
+        namespace Result {
+
+            'ResultView------------------------------------------'
+            ResultView : + Action OnClickedRestartListener
+            ResultView : + Action OnClickedBackListener
+            '--------------------------------------------------------'
+            ResultView : + void OnClickedRestart()
+            ResultView : + void OnClickedBack()
+            '--------------------------------------------------------'
+
+        }
+
+    }
+
+}
+
+'遷移図'
 
 @enduml
