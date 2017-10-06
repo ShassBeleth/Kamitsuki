@@ -1,6 +1,6 @@
 @startuml
 
-title 状態遷移
+title 状態遷移図
 
 '画面遷移'
 [*] -down-> タイトル画面
