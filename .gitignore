@@ -1,9 +1,9 @@
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/Assets/AssetStoreTools*
+/Program/Kamitsuki/[Ll]ibrary/
+/Program/Kamitsuki/[Tt]emp/
+/Program/Kamitsuki/[Oo]bj/
+/Program/Kamitsuki/[Bb]uild/
+/Program/Kamitsuki/[Bb]uilds/
+/Program/Kamitsuki/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
 /.vs/
