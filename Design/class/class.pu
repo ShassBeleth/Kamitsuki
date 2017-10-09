@@ -51,6 +51,10 @@ namespace Kamitsuki {
 
         namespace Title {
 
+            'TitleBackView------------------------------------------'
+            TitleBackView : + void Update()
+            '--------------------------------------------------------'
+
             'TitleLogoView------------------------------------------'
             TitleLogoView : + Action OnAnyUserOperationListener
             TitleLogoView : + Action OnEndAnimationListener
@@ -74,49 +78,25 @@ namespace Kamitsuki {
         namespace Option {
 
             'OptionView------------------------------------------'
+            OptionView : + Action OnClickedChangeProfileListener
+            OptionView : + Action OnClickedSettingControllerListener
+            OptionView : + Action OnClickedResultListener
             OptionView : + Action OnClickedBackListener
             '--------------------------------------------------------'
+            OptionView : + void OnClickedChangeProfile()
+            OptionView : + void OnClickedSettingController()
+            OptionView : + void OnClickedResult()
             OptionView : + void OnClickedBack()
             '--------------------------------------------------------'
 
         }
 
-        namespace CharacterSelect {
+        namespace Score {
 
-            'CharacterSelectView------------------------------------------'
-            CharacterSelectView : + Action OnClickedHumanListener
-            CharacterSelectView : + Action OnClickedOgreListener
-            CharacterSelectView : + Action OnClickedBackListener
+            'ScoreView------------------------------------------'
+            ScoreView : + Action OnClickedBackListener
             '--------------------------------------------------------'
-            CharacterSelectView : + void OnClickedHuman()
-            CharacterSelectView : + void OnClickedOgre()
-            CharacterSelectView : + void OnClickedBack()
-            '--------------------------------------------------------'
-
-        }
-
-        namespace HumanCustomizer {
-
-            'HumanCustomizerView------------------------------------------'
-            HumanCustomizerView : + Action<int> OnSelectedWeaponListener
-            HumanCustomizerView : + Action<int> OnSelectedSuitListener
-            HumanCustomizerView : + Action OnClickedBackListener
-            '--------------------------------------------------------'
-            HumanCustomizerView : + void OnSelectedWeapon( int id )
-            HumanCustomizerView : + void OnSelectedSuit( int id )
-            HumanCustomizerView : + void OnClickedBack()
-            '--------------------------------------------------------'
-
-        }
-
-        namespace OgreCustomizer {
-
-            'OgreCustomizerView------------------------------------------'
-            OgreCustomizerView : + Action<int> OnSelectedTypeListener
-            OgreCustomizerView : + Action OnClickedBackListener
-            '--------------------------------------------------------'
-            OgreCustomizerView : + void OnSelectedType( int id )
-            OgreCustomizerView : + void OnClickedBack()
+            ScoreView : + void OnClickedBack()
             '--------------------------------------------------------'
 
         }
@@ -128,12 +108,12 @@ namespace Kamitsuki {
                 'EntranceView------------------------------------------'
                 EntranceView : + Action OnClickedCreateRoomListener
                 EntranceView : + Action OnClickedSearchRoomListener
-                EntranceView : + Action OnClickedCharacterSelectListener
+                EntranceView : + Action OnClickedFieldWalkListener
                 EntranceView : + Action OnClickedBackListener
                 '--------------------------------------------------------'
                 EntranceView : + void OnClickedCreateRoom()
                 EntranceView : + void OnClickedSearchRoom()
-                EntranceView : + void OnClickedCharacterSelect()
+                EntranceView : + void OnClickedFieldWalk()
                 EntranceView : + void OnClickedBack()
                 '--------------------------------------------------------'
 
@@ -141,31 +121,97 @@ namespace Kamitsuki {
 
             namespace Lobby {
 
-                'RoomCreaterView------------------------------------------'
-                RoomCreaterView : + Action OnClickedCreateRoomListener
-                RoomCreaterView : + Action OnClickedBackListener
-                '--------------------------------------------------------'
-                RoomCreaterView : + void OnClickedCreateRoom()
-                RoomCreaterView : + void OnClickedBack()
-                '--------------------------------------------------------'
+                namespace RoomCreater {
 
-                'RoomSearcherView------------------------------------------'
-                RoomSearcherView : + Action OnClikedPasswordDecisionListener
-                RoomSearcherView : + Action OnSelectedRoomListener
-                RoomSearcherView : + Action OnClickedBackListener
-                '--------------------------------------------------------'
-                RoomSearcherView : + void OnClickedPasswordDecision()
-                RoomSearcherView : + void OnSelectedRoom()
-                RoomSearcherView : + void OnClickedBack()
-                '--------------------------------------------------------'
+                    'RoomCreaterView------------------------------------------'
+                    RoomCreaterView : + Action OnClickedCreateRoomListener
+                    RoomCreaterView : + Action OnClickedSetDetailListener
+                    RoomCreaterView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    RoomCreaterView : + void OnClickedCreateRoom()
+                    RoomCreaterView : + void OnClickedSetDetail()
+                    RoomCreaterView : + void OnClickedBack()
+                    '--------------------------------------------------------'
 
-                'StandbyRoomView------------------------------------------'
-                StandbyRoomView : + Action OnClickedStartListener
-                StandbyRoomView : + Action OnClickedBackListener
-                '--------------------------------------------------------'
-                StandbyRoomView : + void OnClickedStart()
-                StandbyRoomView : + void OnClickedBack()
-                '--------------------------------------------------------'
+                    'RoomDetailSetterView------------------------------------------'
+                    RoomDetailSetterView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    RoomDetailSetterView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                }
+
+                namespace RoomSearcher {
+
+                    'RoomSearcherView------------------------------------------'
+                    RoomSearcherView : + Action OnUpdateListListener
+                    RoomSearcherView : + Action OnSelectedRoomListener
+                    RoomSearcherView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    RoomSearcherView : + void OnUpdateList()
+                    RoomSearcherView : + void OnSelectedRoom()
+                    RoomSearcherView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                    'AppointeeView------------------------------------------'
+                    AppointeeView : + Action OnUpdateListListener
+                    AppointeeView : + Action OnSelectedRoomListener
+                    AppointeeView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    AppointeeView : + void OnUpdateList()
+                    AppointeeView : + void OnSelectedRoom()
+                    AppointeeView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                }
+
+                namespace StandbyRoom {
+
+                    'StandbyRoomView------------------------------------------'
+                    StandbyRoomView : + Action OnClickedStartListener
+                    StandbyRoomView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    StandbyRoomView : + void OnClickedStart()
+                    StandbyRoomView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                }
+
+                namespace OgreCustomizer {
+
+                    'OgreCustomizerView------------------------------------------'
+                    OgreCustomizerView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    OgreCustomizerView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                }
+
+                namespace HumanCustomizer {
+
+                    'EquipCustomizerView------------------------------------------'
+                    EquipCustomizerView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    EquipCustomizerView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                    'WeaponCustomizerView------------------------------------------'
+                    WeaponCustomizerView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    WeaponCustomizerView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                }
+
+                namespace FieldSelecter {
+
+                    'FieldSelecterView------------------------------------------'
+                    FieldSelecterView : + Action OnClickedBackListener
+                    '--------------------------------------------------------'
+                    FieldSelecterView : + void OnClickedBack()
+                    '--------------------------------------------------------'
+
+                }
 
             }
 
