@@ -1,0 +1,118 @@
+@startuml
+
+title 起動時シーケンス図
+
+actor ユーザ
+
+ユーザ -> Manager : ゲーム起動
+activate ユーザ
+activate Manager
+
+create ConfigModel
+Manager -> ConfigModel : (Child Component)
+activate ConfigModel
+
+create ProfileSetterPresenter
+Manager -> ProfileSetterPresenter : Instantiate()
+activate ProfileSetterPresenter
+
+create ProfileSetterView
+ProfileSetterPresenter -> ProfileSetterView : (Child Component)
+activate ProfileSetterView
+
+alt 初回起動時
+
+    Manager -> ProfileSetterPresenter : Initialized()
+    activate ProfileSetterPresenter
+
+    ConfigModel <- ProfileSetterPresenter : IsFirstTimeStartUp()
+    activate ConfigModel
+    ConfigModel --> ProfileSetterPresenter
+    deactivate ConfigModel
+
+    ProfileSetterPresenter -> ProfileSetterView : SetActive(true)
+    activate ProfileSetterView
+    ProfileSetterPresenter <-- ProfileSetterView
+    deactivate ProfileSetterView
+
+    ProfileSetterPresenter -> ProfileSetterView : Initialized()
+    activate ProfileSetterView
+    ProfileSetterPresenter <-- ProfileSetterView
+    deactivate ProfileSetterView
+
+    deactivate ProfileSetterPresenter
+
+    opt OKボタン押下時
+
+        ユーザ -> ProfileSetterView : OK
+        activate ProfileSetterView
+
+        ProfileSetterPresenter <- ProfileSetterView : OnClickedDesision()
+        activate ProfileSetterPresenter
+
+        ConfigModel <- ProfileSetterPresenter : UpdateUserName()
+        activate ConfigModel
+        ConfigModel --> ProfileSetterPresenter
+        deactivate ConfigModel
+
+        ProfileSetterPresenter -> ProfileSetterView : CloseWindow()
+        activate ProfileSetterView
+        ProfileSetterPresenter <-- ProfileSetterView
+        deactivate ProfileSetterView
+
+        ProfileSetterPresenter --> ProfileSetterView
+        deactivate ProfileSetterView
+        deactivate ProfileSetterPresenter
+
+        ProfileSetterPresenter <- ProfileSetterView : OnEndClosingAnimation()
+        activate ProfileSetterPresenter
+
+        Manager <- ProfileSetterPresenter : OnEndSetingProfile()
+        activate Manager
+        Manager --> ProfileSetterPresenter
+        deactivate Manager
+
+        ProfileSetterPresenter -> ProfileSetterView : SetActive(false)
+        activate ProfileSetterView
+        ProfileSetterPresenter <-- ProfileSetterView
+        deactivate ProfileSetterView
+
+        ProfileSetterPresenter --> ProfileSetterView
+        deactivate ProfileSetterPresenter
+
+        ProfileSetterPresenter <-- ProfileSetterView
+        deactivate ProfileSetterView
+
+    end
+
+else 2回目以降の起動時
+
+    Manager -> ProfileSetterPresenter : Initialized()
+    activate ProfileSetterPresenter
+
+    ConfigModel <- ProfileSetterPresenter : IsFirstTimeStartUp()
+    activate ConfigModel
+
+    ConfigModel --> ProfileSetterPresenter
+    deactivate ConfigModel
+
+    Manager <- ProfileSetterPresenter : OnEndSetingProfile()
+    activate Manager
+    Manager -> ProfileSetterPresenter : SetActive(false)
+    activate ProfileSetterPresenter
+    Manager <-- ProfileSetterPresenter
+    deactivate ProfileSetterPresenter
+    Manager --> ProfileSetterPresenter
+    deactivate Manager
+    deactivate ProfileSetterPresenter
+
+end
+
+Manager <-- ProfileSetterPresenter
+deactivate ProfileSetterPresenter
+
+Manager -> Manager : タイトル画面表示
+activate Manager
+deactivate Manager
+
+@enduml

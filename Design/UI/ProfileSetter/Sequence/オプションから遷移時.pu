@@ -1,0 +1,121 @@
+@startuml
+
+title オプションから遷移時シーケンス図
+
+actor ユーザ
+
+activate ユーザ
+activate Manager
+activate ConfigModel
+
+create ProfileSetterPresenter
+Manager -> ProfileSetterPresenter : Instantiate()
+activate ProfileSetterPresenter
+
+create ProfileSetterView
+ProfileSetterPresenter -> ProfileSetterView : (Child Component)
+activate ProfileSetterView
+
+Manager -> ProfileSetterPresenter : Initialized()
+activate ProfileSetterPresenter
+
+ConfigModel <- ProfileSetterPresenter : GetUserName()
+activate ConfigModel
+ConfigModel --> ProfileSetterPresenter
+deactivate ConfigModel
+
+ProfileSetterPresenter -> ProfileSetterView : SetActive(true)
+activate ProfileSetterView
+ProfileSetterPresenter <-- ProfileSetterView
+deactivate ProfileSetterView
+
+ProfileSetterPresenter -> ProfileSetterView : Initialized()
+activate ProfileSetterView
+ProfileSetterPresenter <-- ProfileSetterView
+deactivate ProfileSetterView
+
+deactivate ProfileSetterPresenter
+
+opt OKボタン押下時
+
+    ユーザ -> ProfileSetterView : OK
+    activate ProfileSetterView
+
+    ProfileSetterPresenter <- ProfileSetterView : OnClickedDesision()
+    activate ProfileSetterPresenter
+
+    ConfigModel <- ProfileSetterPresenter : UpdateUserName()
+    activate ConfigModel
+    ConfigModel --> ProfileSetterPresenter
+    deactivate ConfigModel
+
+    ProfileSetterPresenter -> ProfileSetterView : CloseWindow()
+    activate ProfileSetterView
+    ProfileSetterPresenter <-- ProfileSetterView
+    deactivate ProfileSetterView
+
+    ProfileSetterPresenter --> ProfileSetterView
+    deactivate ProfileSetterView
+    deactivate ProfileSetterPresenter
+
+    ProfileSetterPresenter <- ProfileSetterView : OnEndClosingAnimation()
+    activate ProfileSetterPresenter
+
+    Manager <- ProfileSetterPresenter : OnEndSetingProfile()
+    activate Manager
+    Manager --> ProfileSetterPresenter
+    deactivate Manager
+
+    ProfileSetterPresenter -> ProfileSetterView : SetActive(false)
+    activate ProfileSetterView
+    ProfileSetterPresenter <-- ProfileSetterView
+    deactivate ProfileSetterView
+
+    ProfileSetterPresenter --> ProfileSetterView
+    deactivate ProfileSetterPresenter
+
+end
+
+opt キャンセルボタン押下時
+
+    ユーザ -> ProfileSetterView : キャンセル
+    activate ProfileSetterView
+
+    ProfileSetterPresenter <- ProfileSetterView : OnClickedCancel()
+    activate ProfileSetterPresenter
+
+    ProfileSetterPresenter -> ProfileSetterView : CloseWindow()
+    activate ProfileSetterView
+    ProfileSetterPresenter <-- ProfileSetterView
+    deactivate ProfileSetterView
+
+    ProfileSetterPresenter --> ProfileSetterView
+    deactivate ProfileSetterView
+    deactivate ProfileSetterPresenter
+
+    ProfileSetterPresenter <- ProfileSetterView : OnEndClosingAnimation()
+    activate ProfileSetterPresenter
+
+    Manager <- ProfileSetterPresenter : OnEndSetingProfile()
+    activate Manager
+    Manager --> ProfileSetterPresenter
+    deactivate Manager
+
+    ProfileSetterPresenter -> ProfileSetterView : SetActive(false)
+    activate ProfileSetterView
+    ProfileSetterPresenter <-- ProfileSetterView
+    deactivate ProfileSetterView
+
+    ProfileSetterPresenter --> ProfileSetterView
+    deactivate ProfileSetterPresenter
+
+end
+
+
+ProfileSetterPresenter <-- ProfileSetterView
+deactivate ProfileSetterView
+
+Manager <-- ProfileSetterPresenter
+deactivate ProfileSetterPresenter
+
+@enduml
