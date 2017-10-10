@@ -21,5 +21,9 @@
 # 詳細
 アプリ起動時とオプションからユーザ名を変更する際に生成される  
 ## 起動時シーケンス
+![起動時シーケンス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/UI/ProfileSetter/Images/%E8%B5%B7%E5%8B%95%E6%99%82%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3.png)
+
 ## オプションから選択時シーケンス
+![オプションから遷移時シーケンス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/UI/ProfileSetter/Images/%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%8B%E3%82%89%E9%81%B7%E7%A7%BB%E6%99%82%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3.png)
+
 ## プレハブ構造
