@@ -1,0 +1,151 @@
+@startuml
+
+title タイトルシーケンス図
+
+actor ユーザ
+
+ユーザ -> Manager
+activate ユーザ
+activate Manager
+
+create TitlePresenter
+Manager -> TitlePresenter : Instantiate()
+activate TitlePresenter
+
+create TitleBackView
+TitlePresenter -> TitleBackView : (Child Component)
+activate TitleBackView
+
+create TitleLogoView
+TitlePresenter -> TitleLogoView : (Child Component)
+activate TitleLogoView
+
+create TitleSelectorView
+TitlePresenter -> TitleSelectorView : (Child Component)
+activate TitleSelectorView
+
+Manager -> TitlePresenter : Initialized()
+activate TitlePresenter
+
+TitlePresenter -> TitleBackView : Initialized()
+activate TitleBackView
+TitlePresenter <-- TitleBackView
+deactivate TitleBackView
+
+TitlePresenter -> TitleLogoView : Initialized()
+activate TitleLogoView
+TitlePresenter <-- TitleLogoView
+deactivate TitleLogoView
+
+TitlePresenter -> TitleSelectorView : Initialized()
+activate TitleSelectorView
+TitlePresenter <-- TitleSelectorView
+deactivate TitleSelectorView
+
+Manager <-- TitlePresenter
+deactivate TitlePresenter
+
+opt ユーザが何かしらボタンを押した時
+
+    ユーザ -> TitleLogoView : Action
+    activate TitleLogoView
+
+    TitlePresenter <- TitleLogoView : OnAnyUserOperation()
+    activate TitlePresenter
+
+    TitlePresenter -> TitleLogoView : EndAnimation()
+    activate TitleLogoView
+    TitlePresenter <-- TitleLogoView
+    deactivate TitleLogoView
+
+    TitlePresenter -> TitleSelectorView : SetActive(ture)
+    activate TitleSelectorView
+    TitlePresenter <-- TitleSelectorView
+    deactivate TitleSelectorView
+
+    TitlePresenter --> TitleLogoView
+    deactivate TitlePresenter
+
+    deactivate TitleLogoView
+
+end
+
+opt ロゴアニメーション終了時
+
+    TitlePresenter <- TitleLogoView : OnEndAnimationListener()
+    activate TitlePresenter
+
+    TitlePresenter -> TitleLogoView : EndAnimation()
+    activate TitleLogoView
+    TitlePresenter <-- TitleLogoView
+    deactivate TitleLogoView
+
+    TitlePresenter -> TitleSelectorView : SetActive(ture)
+    activate TitleSelectorView
+    TitlePresenter <-- TitleSelectorView
+    deactivate TitleSelectorView
+
+    TitlePresenter --> TitleLogoView
+    deactivate TitlePresenter
+
+end
+
+opt 遊ぶボタン押下時
+
+    ユーザ -> TitleSelectorView : 遊ぶボタン押下
+    activate TitleSelectorView
+
+    TitlePresenter <- TitleSelectorView : OnClickedPlay()
+    activate TitlePresenter
+
+    TitlePresenter -> TitlePresenter : マルチプレイ画面表示
+    activate TitlePresenter
+    deactivate TitlePresenter
+
+    TitlePresenter --> TitleSelectorView
+    deactivate TitlePresenter
+
+    deactivate TitleSelectorView
+
+end
+
+opt オプションボタン押下時
+
+    ユーザ -> TitleSelectorView : オプションボタン押下時
+    activate TitleSelectorView
+
+    TitlePresenter <- TitleSelectorView : OnClickedOption()
+    activate TitlePresenter
+
+    TitlePresenter -> TitlePresenter : オプション画面表示
+    activate TitlePresenter
+    deactivate TitlePresenter
+
+    TitlePresenter --> TitleSelectorView
+    deactivate TitlePresenter
+
+    deactivate TitleSelectorView
+
+end
+
+opt 終了ボタン押下時
+
+    ユーザ -> TitleSelectorView : 終了ボタン押下時
+    activate TitleSelectorView
+
+    TitlePresenter <- TitleSelectorView : OnClickedExit()
+    activate TitlePresenter
+
+    Manager <- TitlePresenter : Exit()
+    activate Manager
+    Manager --> TitlePresenter
+    deactivate Manager
+
+    TitlePresenter --> TitleSelectorView
+    deactivate TitlePresenter
+
+    deactivate TitleSelectorView
+
+end
+
+@enduml
