@@ -1,0 +1,71 @@
+@startuml
+
+title 成績シーケンス図
+
+actor ユーザ
+
+ユーザ -> Manager
+activate ユーザ
+activate Manager
+
+create ConfigModel
+Manager -> ConfigModel : (Child Component)
+
+create ScorePresenter
+Manager -> ScorePresenter : Instantiate()
+activate ScorePresenter
+
+create ScoreView
+ScorePresenter -> ScoreView : (Child Component)
+activate ScoreView
+
+Manager -> ScorePresenter : Initialized()
+activate ScorePresenter
+
+ConfigModel <- ScorePresenter : LoginDate
+activate ConfigModel
+ConfigModel --> ScorePresenter
+deactivate ConfigModel
+
+Manager <- ScorePresenter : GetScore()
+activate Manager
+Manager --> ScorePresenter
+deactivate Manager
+
+ScorePresenter -> ScoreView : Initialized()
+activate ScoreView
+ScorePresenter <-- ScoreView
+deactivate ScoreView
+
+Manager <-- ScorePresenter
+deactivate ScorePresenter
+
+opt 戻るボタン押下時
+
+    ユーザ -> ScoreView : オプションボタン押下時
+    activate ScoreView
+
+    ScorePresenter <- ScoreView : OnClickedBack()
+    activate ScorePresenter
+
+    ScorePresenter -> ScoreView : SetActive(false)
+    activate ScoreView
+    ScorePresenter <-- ScoreView
+    deactivate ScoreView
+
+    Manager <- ScorePresenter : 前画面に遷移
+    activate Manager
+    Manager --> ScorePresenter
+    deactivate Manager
+
+    ScorePresenter --> ScoreView
+    deactivate ScorePresenter
+
+    deactivate ScoreView
+
+    deactivate ScoreView
+    deactivate ScorePresenter
+
+end
+
+@enduml
