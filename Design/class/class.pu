@@ -10,6 +10,16 @@ namespace Kamitsuki {
 
     namespace Models {
 
+        namespace Configs {
+
+            'ConfigModel------------------------------------------'
+            ConfigModel : + string UserName
+            '--------------------------------------------------------'
+            ConfigModel : + ConfigModel()
+            '--------------------------------------------------------'
+
+        }
+
     }
 
     namespace Presenters {
@@ -18,6 +28,14 @@ namespace Kamitsuki {
         }
 
         namespace Option {
+
+            'ProfileSetterPresenter------------------------------------------'
+            ProfileSetterPresenter : - ConfigModel ConfigModel
+            ProfileSetterPresenter : - ProfileSetterView ProfileSetterView
+            '--------------------------------------------------------'
+            ProfileSetterPresenter : + void Initialized()
+            '--------------------------------------------------------'
+
         }
 
         namespace CharacterSelect {
@@ -87,6 +105,17 @@ namespace Kamitsuki {
             OptionView : + void OnClickedSettingController()
             OptionView : + void OnClickedResult()
             OptionView : + void OnClickedBack()
+            '--------------------------------------------------------'
+
+            'ProfileSetterView------------------------------------------'
+            ProfileSetterView : + Action OnClickedDesitionListener
+            ProfileSetterView : + Action OnClickedCancelListener
+            ProfileSetterView : + Action OnEndClosingAnimationListener
+            '--------------------------------------------------------'
+            ProfileSetterView : + void Initialized()
+            ProfileSetterView : + void OnClickedDesision()
+            ProfileSetterView : + void OnClickedCancel()
+            ProfileSetterView : + void CloseWindow()
             '--------------------------------------------------------'
 
         }
@@ -239,5 +268,7 @@ namespace Kamitsuki {
 }
 
 '遷移図'
+Kamitsuki.Models.Configs.ConfigModel -right-o Kamitsuki.Presenters.Option.ProfileSetterPresenter
+Kamitsuki.Presenters.Option.ProfileSetterPresenter o-right- Kamitsuki.Views.Option.ProfileSetterView
 
 @enduml
