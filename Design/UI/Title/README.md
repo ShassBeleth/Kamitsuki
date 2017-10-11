@@ -34,6 +34,6 @@
 ゲーム開始時に生成される
 
 ## タイトルシーケンス
-![タイトルシーケンス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/UI/ProfileSetter/Images/%E8%B5%B7%E5%8B%95%E6%99%82%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3.png)
+![タイトルシーケンス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/UI/Title/Images/%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3.png)
 
 ## プレハブ構造
