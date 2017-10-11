@@ -5,7 +5,7 @@ title クラス図
 'privateやpublicのアイコンをやめて-や+で記載'
 skinparam classAttributeIconSize 0
 
-'定義'
+'定義----------------------------------------------------------------------------------------------------'
 namespace Kamitsuki {
 
     namespace Models {
@@ -25,6 +25,15 @@ namespace Kamitsuki {
     namespace Presenters {
 
         namespace Title {
+
+            'TitlePresenter------------------------------------------'
+            TitlePresenter : - TitleBackView TitleBackView
+            TitlePresenter : - TitleLogoView TitleLogoView
+            TitlePresenter : - TitleSelectorView TitleSelectorView
+            '--------------------------------------------------------'
+            TitlePresenter : + void Initialized()
+            '--------------------------------------------------------'
+
         }
 
         namespace Option {
@@ -38,13 +47,8 @@ namespace Kamitsuki {
 
         }
 
-        namespace CharacterSelect {
-        }
+        namespace Score {
 
-        namespace HumanCustomizer {
-        }
-
-        namespace OgreCustomizer {
         }
 
         namespace MultiPlay {
@@ -53,6 +57,25 @@ namespace Kamitsuki {
             }
 
             namespace Lobby {
+
+                namespace RoomCreater {
+                }
+
+                namespace RoomSearcher {
+                }
+
+                namespace StandbyRoom {
+                }
+
+                namespace HumanCustomizer {
+                }
+
+                namespace OgreCustomizer {
+                }
+
+                namespace FieldSelecter {
+                }
+
             }
 
             namespace MainGame {
@@ -70,6 +93,8 @@ namespace Kamitsuki {
         namespace Title {
 
             'TitleBackView------------------------------------------'
+            '--------------------------------------------------------'
+            TitleBackView : + void Initialized()
             TitleBackView : + void Update()
             '--------------------------------------------------------'
 
@@ -77,15 +102,19 @@ namespace Kamitsuki {
             TitleLogoView : + Action OnAnyUserOperationListener
             TitleLogoView : + Action OnEndAnimationListener
             '--------------------------------------------------------'
+            TitleLogoView : + void Initialized()
             TitleLogoView : + void Update()
             TitleLogoView : + void OnAnyUserOperation()
+            TitleLogoView : + void ForceFinishAnimation()
             '--------------------------------------------------------'
 
-            'TitleSelectorView------------------------------------------'
+            'TitleSelectorView---------------------------------------'
             TitleSelectorView : + Action OnClickedPlayListener
             TitleSelectorView : + Action OnClickedOptionListener
             TitleSelectorView : + Action OnClickedExitListener
             '--------------------------------------------------------'
+            TitleSelectorView : + void Initialized()
+            TitleSelectorView : + void ForceShowSelector()
             TitleSelectorView : + void OnClickedPlay()
             TitleSelectorView : + void OnClickedOption()
             TitleSelectorView : + void OnClickedExit()
@@ -267,8 +296,39 @@ namespace Kamitsuki {
 
 }
 
-'遷移図'
+'遷移図----------------------------------------------------------------------------------------------------'
+
 Kamitsuki.Models.Configs.ConfigModel -right-o Kamitsuki.Presenters.Option.ProfileSetterPresenter
 Kamitsuki.Presenters.Option.ProfileSetterPresenter o-right- Kamitsuki.Views.Option.ProfileSetterView
+
+Kamitsuki.Presenters.Title.TitlePresenter o-right- Kamitsuki.Views.Title.TitleBackView
+Kamitsuki.Presenters.Title.TitlePresenter o-right- Kamitsuki.Views.Title.TitleLogoView
+Kamitsuki.Presenters.Title.TitlePresenter o-right- Kamitsuki.Views.Title.TitleSelectorView
+
+'レイアウト補助----------------------------------------------------------------------------------------------------'
+Kamitsuki.Models -[hidden]--> Kamitsuki.Presenters
+Kamitsuki.Presenters -[hidden]--> Kamitsuki.Views
+
+Kamitsuki.Presenters.Title -[hidden]--> Kamitsuki.Presenters.Option
+Kamitsuki.Presenters.Option -[hidden]--> Kamitsuki.Presenters.Score
+Kamitsuki.Presenters.Score -[hidden]--> Kamitsuki.Presenters.MultiPlay
+Kamitsuki.Presenters.MultiPlay.Entrance -[hidden]--> Kamitsuki.Presenters.MultiPlay.Lobby
+Kamitsuki.Presenters.Lobby.RoomCreater -[hidden]--> Kamitsuki.Presenters.Lobby.RoomSearcher
+Kamitsuki.Presenters.Lobby.RoomSearcher -[hidden]--> Kamitsuki.Presenters.Lobby.StandbyRoom
+Kamitsuki.Presenters.Lobby.StandbyRoom -[hidden]--> Kamitsuki.Presenters.Lobby.HumanCustomizer
+Kamitsuki.Presenters.Lobby.HumanCustomizer -[hidden]--> Kamitsuki.Presenters.Lobby.OgreCustomizer
+Kamitsuki.Presenters.MultiPlay.Lobby -[hidden]--> Kamitsuki.Presenters.MultiPlay.MainGame
+Kamitsuki.Presenters.MultiPlay -[hidden]--> Kamitsuki.Presenters.Result
+
+Kamitsuki.Views.Title -[hidden]--> Kamitsuki.Views.Option
+Kamitsuki.Views.Option -[hidden]--> Kamitsuki.Views.Score
+Kamitsuki.Views.Score -[hidden]--> Kamitsuki.Views.MultiPlay
+Kamitsuki.Views.MultiPlay.Entrance -[hidden]--> Kamitsuki.Views.MultiPlay.Lobby
+Kamitsuki.Views.Lobby.RoomCreater -[hidden]--> Kamitsuki.Views.Lobby.RoomSearcher
+Kamitsuki.Views.Lobby.RoomSearcher -[hidden]--> Kamitsuki.Views.Lobby.StandbyRoom
+Kamitsuki.Views.Lobby.StandbyRoom -[hidden]--> Kamitsuki.Views.Lobby.HumanCustomizer
+Kamitsuki.Views.Lobby.HumanCustomizer -[hidden]--> Kamitsuki.Views.Lobby.OgreCustomizer
+Kamitsuki.Views.MultiPlay.Lobby -[hidden]--> Kamitsuki.Views.MultiPlay.MainGame
+Kamitsuki.Views.MultiPlay -[hidden]--> Kamitsuki.Views.Result
 
 @enduml

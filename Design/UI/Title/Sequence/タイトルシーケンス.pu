@@ -53,12 +53,17 @@ opt ユーザが何かしらボタンを押した時
     TitlePresenter <- TitleLogoView : OnAnyUserOperation()
     activate TitlePresenter
 
-    TitlePresenter -> TitleLogoView : EndAnimation()
+    TitlePresenter -> TitleLogoView : ForceFinishAnimation()
     activate TitleLogoView
     TitlePresenter <-- TitleLogoView
     deactivate TitleLogoView
 
     TitlePresenter -> TitleSelectorView : SetActive(ture)
+    activate TitleSelectorView
+    TitlePresenter <-- TitleSelectorView
+    deactivate TitleSelectorView
+
+    TitlePresenter -> TitleSelectorView : ForceShowSelector()
     activate TitleSelectorView
     TitlePresenter <-- TitleSelectorView
     deactivate TitleSelectorView
@@ -74,11 +79,6 @@ opt ロゴアニメーション終了時
 
     TitlePresenter <- TitleLogoView : OnEndAnimationListener()
     activate TitlePresenter
-
-    TitlePresenter -> TitleLogoView : EndAnimation()
-    activate TitleLogoView
-    TitlePresenter <-- TitleLogoView
-    deactivate TitleLogoView
 
     TitlePresenter -> TitleSelectorView : SetActive(ture)
     activate TitleSelectorView
