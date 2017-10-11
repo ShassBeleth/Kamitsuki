@@ -14,6 +14,7 @@ namespace Kamitsuki {
 
             'ConfigModel------------------------------------------'
             ConfigModel : + string UserName
+            ConfigModel : + DateTime FirstLoginDate
             '--------------------------------------------------------'
             ConfigModel : + ConfigModel()
             '--------------------------------------------------------'
@@ -48,6 +49,13 @@ namespace Kamitsuki {
         }
 
         namespace Score {
+
+            'ScorePresenter------------------------------------------'
+            ScorePresenter : - ConfigModel ConfigModel
+            ScorePresenter : - ScoreView ScoreView
+            '--------------------------------------------------------'
+            ScorePresenter : + void Initialized()
+            '--------------------------------------------------------'
 
         }
 
@@ -154,6 +162,7 @@ namespace Kamitsuki {
             'ScoreView------------------------------------------'
             ScoreView : + Action OnClickedBackListener
             '--------------------------------------------------------'
+            ScoreView : + void Initialized()
             ScoreView : + void OnClickedBack()
             '--------------------------------------------------------'
 
@@ -304,6 +313,9 @@ Kamitsuki.Presenters.Option.ProfileSetterPresenter o-right- Kamitsuki.Views.Opti
 Kamitsuki.Presenters.Title.TitlePresenter o-right- Kamitsuki.Views.Title.TitleBackView
 Kamitsuki.Presenters.Title.TitlePresenter o-right- Kamitsuki.Views.Title.TitleLogoView
 Kamitsuki.Presenters.Title.TitlePresenter o-right- Kamitsuki.Views.Title.TitleSelectorView
+
+Kamitsuki.Models.Configs.ConfigModel -right-o Kamitsuki.Presenters.Score.ScorePresenter
+Kamitsuki.Presenters.Score.ScorePresenter -right-o Kamitsuki.Views.Score.ScoreView
 
 'レイアウト補助----------------------------------------------------------------------------------------------------'
 Kamitsuki.Models -[hidden]--> Kamitsuki.Presenters
