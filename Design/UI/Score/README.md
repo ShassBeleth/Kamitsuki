@@ -49,6 +49,6 @@
 画面を開くたびに生成する  
 
 ## 成績シーケンス
-![成績シーケンス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/UI/Title/Images/%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3.png)
+![成績シーケンス図](https://github.com/ShassBeleth/Kamitsuki/blob/develop/v1.0.0/Design/UI/Score/Images/%E6%88%90%E7%B8%BE%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3.png)
 
 ## プレハブ構造
