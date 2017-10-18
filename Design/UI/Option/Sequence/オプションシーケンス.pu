@@ -1,0 +1,125 @@
+@startuml
+
+title オプションシーケンス図
+
+actor ユーザ
+
+ユーザ -> Manager
+activate ユーザ
+activate Manager
+activate ConfigModel
+
+create OptionPresenter
+Manager -> OptionPresenter : Instantiate()
+activate OptionPresenter
+
+create OptionView
+OptionPresenter -> OptionView : (Child Component)
+activate OptionView
+
+Manager -> OptionPresenter : Initialized()
+activate OptionPresenter
+
+OptionPresenter -> OptionView : Initialized()
+activate OptionView
+
+ConfigModel <- OptionView : SEValue
+activate ConfigModel
+ConfigModel --> OptionView
+deactivate ConfigModel
+
+ConfigModel <- OptionView : BgmValue
+activate ConfigModel
+ConfigModel --> OptionView
+deactivate ConfigModel
+
+OptionPresenter <-- OptionView
+deactivate OptionView
+
+Manager <-- OptionPresenter
+deactivate OptionPresenter
+
+opt プロフィール変更ボタン押下時
+
+    ユーザ -> OptionView : プロフィール変更ボタン押下時
+    activate OptionView
+
+    OptionPresenter <- OptionView : OnClickedChangeProfile()
+    activate OptionPresenter
+    
+    Manager <- OptionPresenter : ChangeProfile()
+    activate Manager
+    Manager --> OptionPresenter
+    deactivate Manager
+
+    OptionPresenter --> OptionView
+    deactivate OptionPresenter
+
+    deactivate OptionView
+
+end
+
+opt 成績ボタン押下時
+
+    ユーザ -> OptionView : 成績ボタン押下時
+    activate OptionView
+
+    OptionPresenter <- OptionView : OnClickedShowScore()
+    activate OptionPresenter
+    
+    Manager <- OptionPresenter : ShowScore()
+    activate Manager
+    Manager --> OptionPresenter
+    deactivate Manager
+
+    OptionPresenter --> OptionView
+    deactivate OptionPresenter
+
+    deactivate OptionView
+
+end
+
+opt 戻るボタン押下時
+
+    ユーザ -> OptionView : 戻るボタン押下時
+    activate OptionView
+
+    OptionPresenter <- OptionView : OnClickedBack()
+    activate OptionPresenter
+
+    ConfigModel <- OptionPresenter : Save()
+    activate ConfigModel
+    ConfigModel --> OptionPresenter
+    deactivate ConfigModel
+
+    OptionPresenter -> OptionView : CloseWindow()
+    activate OptionView
+    OptionPresenter <-- OptionView
+    deactivate OptionView
+
+    deactivate OptionPresenter
+    deactivate OptionView
+
+    OptionPresenter <- OptionView : OnEndClosingAnimation()
+    activate OptionPresenter
+    
+    Manager <- OptionPresenter : OnEndOption()
+    activate Manager
+    Manager --> OptionPresenter
+    deactivate Manager
+
+    OptionPresenter -> OptionView : SetActive(false)
+    activate OptionView
+    OptionPresenter <-- OptionView
+    deactivate OptionView
+
+    OptionPresenter --> OptionView
+    deactivate OptionPresenter
+    deactivate OptionView
+
+end
+
+deactivate OptionPresenter
+deactivate OptionView
+
+@enduml
