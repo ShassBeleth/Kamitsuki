@@ -1,0 +1,130 @@
+@startuml
+
+title エントランスシーケンス図
+
+actor ユーザ
+
+ユーザ -> Manager
+activate ユーザ
+activate Manager
+
+create MultiPlayEntrancePresenter
+Manager -> MultiPlayEntrancePresenter : Instantiate()
+activate MultiPlayEntrancePresenter
+
+create MultiPlayEntranceView
+MultiPlayEntrancePresenter -> MultiPlayEntranceView : (Child Component)
+activate MultiPlayEntranceView
+
+Manager -> MultiPlayEntrancePresenter : Initialized()
+activate MultiPlayEntrancePresenter
+
+MultiPlayEntrancePresenter -> MultiPlayEntranceView : Initialized()
+activate MultiPlayEntranceView
+MultiPlayEntrancePresenter <-- MultiPlayEntranceView
+deactivate MultiPlayEntranceView
+
+Manager <-- MultiPlayEntrancePresenter
+deactivate MultiPlayEntrancePresenter
+
+opt 部屋を作るボタン押下時
+
+    ユーザ -> MultiPlayEntranceView : ボタン押下
+    activate MultiPlayEntranceView
+
+    MultiPlayEntrancePresenter <- MultiPlayEntranceView : OnClickedCreateRoom()
+    activate MultiPlayEntrancePresenter
+    
+    Manager <- MultiPlayEntrancePresenter : CreateRoom()
+    activate Manager
+    Manager --> MultiPlayEntrancePresenter
+    deactivate Manager
+
+    MultiPlayEntrancePresenter --> MultiPlayEntranceView
+    deactivate MultiPlayEntrancePresenter
+
+
+    deactivate MultiPlayEntranceView
+
+end
+
+opt 部屋を探すボタン押下時
+
+    ユーザ -> MultiPlayEntranceView : ボタン押下
+    activate MultiPlayEntranceView
+
+    MultiPlayEntrancePresenter <- MultiPlayEntranceView : OnClickedSearchRoom()
+    activate MultiPlayEntrancePresenter
+    
+    Manager <- MultiPlayEntrancePresenter : SearchRoom()
+    activate Manager
+    Manager --> MultiPlayEntrancePresenter
+    deactivate Manager
+
+    MultiPlayEntrancePresenter --> MultiPlayEntranceView
+    deactivate MultiPlayEntrancePresenter
+
+    deactivate MultiPlayEntranceView
+
+end
+
+opt 散歩ボタン押下時
+
+    ユーザ -> MultiPlayEntranceView : ボタン押下
+    activate MultiPlayEntranceView
+
+    MultiPlayEntrancePresenter <- MultiPlayEntranceView : OnClickedWalking()
+    activate MultiPlayEntrancePresenter
+    
+    Manager <- MultiPlayEntrancePresenter : StartWalking()
+    activate Manager
+    Manager --> MultiPlayEntrancePresenter
+    deactivate Manager
+
+    MultiPlayEntrancePresenter --> MultiPlayEntranceView
+    deactivate MultiPlayEntrancePresenter
+
+    deactivate MultiPlayEntranceView
+
+end
+
+opt 戻るボタン押下時
+
+    ユーザ -> MultiPlayEntranceView : ボタン押下
+    activate MultiPlayEntranceView
+
+    MultiPlayEntrancePresenter <- MultiPlayEntranceView : OnClickedBack()
+    activate MultiPlayEntrancePresenter
+    
+    MultiPlayEntrancePresenter -> MultiPlayEntranceView : CloseWindow()
+    activate MultiPlayEntranceView
+    MultiPlayEntrancePresenter <-- MultiPlayEntranceView
+    deactivate MultiPlayEntranceView
+
+    MultiPlayEntrancePresenter --> MultiPlayEntranceView
+    deactivate MultiPlayEntrancePresenter
+
+    deactivate MultiPlayEntranceView
+
+    MultiPlayEntrancePresenter <- MultiPlayEntranceView : OnEndClosingAnimation()
+    activate MultiPlayEntrancePresenter
+
+    Manager <- MultiPlayEntrancePresenter : OnEndEntrance()
+    activate Manager
+    Manager --> MultiPlayEntrancePresenter
+    deactivate Manager
+
+    MultiPlayEntrancePresenter -> MultiPlayEntranceView : SetActive(false)
+    activate MultiPlayEntranceView
+    MultiPlayEntrancePresenter <-- MultiPlayEntranceView
+    deactivate MultiPlayEntranceView
+
+    MultiPlayEntrancePresenter --> MultiPlayEntranceView
+    deactivate MultiPlayEntrancePresenter
+
+end
+
+deactivate MultiPlayEntrancePresenter
+deactivate MultiPlayEntranceView
+
+@enduml
